@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient Report</title>
+    <link rel="stylesheet" href="/static/css/update_info.css">
+</head>
+<body>
+    <div class="container">
+        <form action="" method="post">
+            <h2>New Report</h2>
+            <div class="content">
+                <div class="input-box">
+                    <label for="id">Patient ID</label>
+                    <input type="number" placeholder="Enter patient id" name="id" required>
+                </div>
+                <div class="input-box">
+                    <label for="date">Date</label>
+                    <input type="date" placeholder="Enter date of treatment" name="Date" required>
+                </div>
+                <div class="input-box">
+                    <label for="doctor">Doctor</label>
+                    <input type="text" placeholder="Enter doctor incharge" name="doctor" required>
+                </div>
+                <div class="input-box">
+                    <label for="category">Category</label>
+                    <input type="text" placeholder="Enter department of doc" name="category" required>
+                </div>
+                <div class="input-box">
+                    <label for="description">Description</label>
+                    <input type="text" placeholder="Enter description of problem" name="description" required>
+                </div>
+                <div class="input-box">
+                    <label for="medicine">Medicine</label>
+                    <input type="text" placeholder="Enter medicines prescribed" name="medicine" required>
+                </div>
+                <div class="input-box">
+                    <label for="report">Add Report PDF</label>
+                    <input type="file" placeholder="Upload Report's PDF" name="report" required>
+                </div>
+                <div class="button-container">
+                    <button type="submit">Add Report</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

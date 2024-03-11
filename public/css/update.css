@@ -1,0 +1,22 @@
+#content main .box-info li{
+    justify-content: center;
+    background: none;
+}
+
+
+
+#content main .box-info li .btn{
+    padding: 1.5rem;
+    font-size: 14px;
+    background: #3C91E6;
+    border: 2px solid white ;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+}
+
+#content main .box-info li .btn:hover{
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+}

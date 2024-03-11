@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Appointment</title>
+    <link rel="stylesheet" href="/css/update_info.css">
+</head>
+
+<body>
+    <div class="container">
+        <form action="" method="post">
+            <h2>Add Appointment</h2>
+            <div class="content">
+                <div class="input-box">
+                    <label for="id">Patient ID</label>
+                    <input type="number" placeholder="Enter updated id" name="id" required>
+                </div>
+                <div class="input-box">
+                    <label for="date">Date</label>
+                    <input type="date" placeholder="Enter date of appointment" name="date" required>
+                </div>
+                <div class="input-box">
+                    <label for="doctor">Doctor</label>
+                    <input type="text" placeholder="Enter updated doctor" name="doctor" required>
+                </div>
+                <div class="input-box">
+                    <label for="category">Category</label>
+                    <input type="text" placeholder="Enter department of doc" name="category" required>
+                </div>
+                <div class="input-box">
+                    <label for="status">Status: </label>
+                    <select id="status" name="status">
+                        <option value="pending">Pending</option>
+                        <option value="updated">Updated</option>
+                    </select>
+                </div>
+                <div class="button-container">
+                    <button type="submit">Add Appointment</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

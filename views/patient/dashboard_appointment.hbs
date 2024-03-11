@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+
+    <title>Appointments</title>
+</head>
+
+<body>
+
+
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-smile'></i>
+            <span class="text">PulseCare</span>
+        </a>
+        <ul class="side-menu top">
+            <li >
+                <a href="/user/dashboard">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/user/dashboard/diagnosis">
+                    <i class='fa fa-heartbeat'></i>
+                    <span class="text">Diagnosis </span>
+                </a>
+            </li>
+            <li>
+                <a href="/user/dashboard/request">
+                    <i class='fa fa-medkit'></i>
+                    <span class="text">Make Appointments</span>
+                </a>
+            </li>
+            <li>
+                <a href="/user/dashboard/treatment">
+                    <i class='fa fa-plus-square'></i>
+                    <span class="text">Treatment</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="/user/dashboard/appointment">
+                    <i class='fa fa-user-md'></i>
+                    <span class="text">Apppointment</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+           
+            <li>
+                <a href="#" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            
+            <form action="#">
+                
+            </form>
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">8</span>
+            </a>
+            <a href="#" class="profile">
+                <img src="img/people.png">
+            </a>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="#">Appointments</a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+
+            
+
+
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Recent Appointments</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Doctor</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th>Delete Appointment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01-10-2021</td>
+                                <td>
+                                    <p>Dr. Chimatu</p>
+                                </td>
+                                <td>Heart Specialist</td>
+                                <td><span class="status completed">Updated</span></td>
+                                <td><a href="">Click Here</a></td>
+                            </tr>
+                            <tr>
+                                <td>06-03-2024</td>
+                                <td>
+                                    <p>Dr. Pachuu</p>
+                                </td>
+                                <td>Heart Specialist</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td><a href="">Click Here</a></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+
+            <button class="appointment_btn">Request for Appointment</button>
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+
+
+    <script src="/js/index.js"></script>
+</body>
+
+</html>
