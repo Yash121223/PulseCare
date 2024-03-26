@@ -20,12 +20,12 @@ route.post('/registered',(req,res)=>{
         if(err)
         console.log(err);
         else
-        res.render('login');
+        res.render('login',{action:'user',serr:obj.insertId});
     });
 })
 
 route.get('/login',(req,res)=>{
-    res.render('login');
+    res.render('login',{action:'user'});
 })
 
 route.post('/logged',(req,res)=>{
