@@ -113,7 +113,7 @@
                 <li>
                     <i class='bx bxs-clinic'></i>
                     <span class="text">
-                        <h3>10</h3>
+                        <h3>{{num}}</h3>
                         <p>Total Doctors</p>
                     </span>
                 </li>
@@ -152,76 +152,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{#doctors}}
                             <tr>
-                                <td> <p>Dr. Prachi</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MD</td>
-                                <td>08-03-2024</td>
-                                <td>8319975278</td>
+                                <td>{{Name}}</td>
+                                <td>{{Department}}</td>
+                                <td>{{Degree}}</td>
+                                <td>{{Date}}</td>
+                                <td>{{Mobile}}</td>
                             </tr>
-                            <tr>
-                                <td> <p>Dr. Yash</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MS</td>
-                                <td>09-03-2024</td>
-                                <td>8889264980</td>
-                            </tr>
-                            <tr>
-                                <td> <p>Dr. Pachu</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MD</td>
-                                <td>08-03-2024</td>
-                                <td>8319975278</td>
-                            </tr>
-                            <tr>
-                                <td> <p>Dr. Pachu</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MD</td>
-                                <td>08-03-2024</td>
-                                <td>8319975278</td>
-                            </tr>
-                            <tr>
-                                <td> <p>Dr. Pachu</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MD</td>
-                                <td>08-03-2024</td>
-                                <td>8319975278</td>
-                            </tr>
-                            <tr>
-                                <td> <p>Dr. Pachu</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MD</td>
-                                <td>08-03-2024</td>
-                                <td>8319975278</td>
-                            </tr>
-                            <tr>
-                                <td> <p>Dr. Pachu</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MD</td>
-                                <td>08-03-2024</td>
-                                <td>8319975278</td>
-                            </tr>
-                            <tr>
-                                <td> <p>Dr. Pachu</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MD</td>
-                                <td>08-03-2024</td>
-                                <td>8319975278</td>
-                            </tr>
-                            <tr>
-                                <td> <p>Dr. Pachu</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MD</td>
-                                <td>08-03-2024</td>
-                                <td>8319975278</td>
-                            </tr>
-                            <tr>
-                                <td> <p>Dr. Pachu</p></td>
-                                <td>Cardiologist</td>
-                                <td>MBBS, MD</td>
-                                <td>08-03-2024</td>
-                                <td>8319975278</td>
-                            </tr>
+                            {{/doctors}}
                         </tbody>
                     </table>
                 </div>
