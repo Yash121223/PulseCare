@@ -282,7 +282,17 @@ route.get('/dashboard/update/report',(req,res)=>{
     }
 })
 
-//
+//Adding report
+route.post(`/updated/reports`,(req,res)=>{
+    let c= req.body;
+
+    pool.query(`INSERT INTO reports (Username,Date,Doctor,Category,Description,Medicine,Report) values(?,?,?,?,?,?,?) `, [c.id,c.date,c.doctor,c.category,c.description,c.medicine,c.report],(err,obj)=>{
+        if(err)
+        console.log(err)
+        else
+        res.send(`Report added succefully`)
+    })
+})
 
 // Simple Logout FUnction
 
