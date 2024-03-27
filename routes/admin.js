@@ -183,6 +183,18 @@ route.get('/dashboard/update/health',(req,res)=>{
     }
 })
 
+//setting health factors
+
+route.post(`/updated/health`,(req,res)=>{
+    let p = req.body;
+    pool.query(`INSERT INTO info_form (Username, Temperature, Heart_Rate, Blood_Group, Systole, Diastole, SpO2, Respiration, BMI, FiO2) values(?,?,?,?,?,?,?,?,?,?)`,[p.id,p.temperature,p.heartRate,p.blood,p.systole,p.diastole,p.spo,p.respiration,p.bmi,p.fio],(err,obj)=>{
+        if(err)
+        console.log(err)
+        else
+        res.send(`health information updated`)
+    })
+})
+
 
 // Information update
 
@@ -269,6 +281,8 @@ route.get('/dashboard/update/report',(req,res)=>{
         res.redirect('/admin/login');
     }
 })
+
+//
 
 // Simple Logout FUnction
 
