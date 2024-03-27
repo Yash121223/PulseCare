@@ -126,19 +126,20 @@
                                 <th>In guidance </th>
                                 <th>Age </th>
                                 <th>Gender </th>
-                                <th>Hospital </th>
+                                <th>Mobile No </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1329</td>
-                                <td>Yash</td>
-                                <td>Malaria</td>
-                                <td> <p>Dr. Prachi</p></td>
-                                <td>20</td>
-                                <td>M</td>
-                                <td>Global Speciality</td>
-                            </tr>
+                            {{#patient}}
+                            <tr><td>{{Username}}</td>
+                            <td>{{Name}}</td>
+                            <td>{{Disease}}</td>
+                            <td>{{Doctor}}</td>
+                            <td>{{Age}}</td>
+                            <td>{{Gender}}</td>
+                            <td>{{Mobile}}</td></tr>
+                           
+                           {{/patient}}
                            
                         </tbody>
                     </table>

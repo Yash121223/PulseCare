@@ -54,20 +54,27 @@ route.get('/dashboard',(req,res)=>{
 
 route.get('/dashboard/patients',(req,res)=>{
     if(req.session.adminname){
-        pool.query('select count (*) as count from users where is_new=1',(err,obj)=>{
-            if (err){
-    
-                console.log(err);
-                res.render('admin/patients',{notification:0});
-            }else{
-                if(obj.length==0)
-                res.render('admin/patients',{notification:0});
-                else{
-                    res.render('admin/patients',{notification:obj[0].count});
+        pool.query(`select * from users`,(err,data)=>{
+            if (err)
+            console.log(err)
+            else{pool.query('select count (*) as count from users where is_new=1',(err,obj)=>{
+                if (err){
+        
+                    console.log(err);
+                    res.render('admin/patients',{notification:0,patient:data});
+                }else{
+                    if(obj.length==0)
+                    res.render('admin/patients',{notification:0,patient:data});
+                    else{
+                        res.render('admin/patients',{notification:obj[0].count,patient:data});
+                    }
                 }
+                
+            })
+
             }
-            
         })
+        
     }
     else{
         res.redirect('/admin/login');
@@ -107,7 +114,7 @@ route.get('/login',(req,res)=>{
 // Login process
 
 route.post('/logged',(req,res)=>{
-    if(req.body.Username=='Pulsecare ka admin'&&req.body.Password=='kake ka hone wala baccha'){
+    if(req.body.Username=='chichi'&&req.body.Password=='1329'){
         req.session.adminname=req.body.Username;
         res.redirect('/admin/dashboard');
     }
@@ -199,6 +206,20 @@ route.get('/dashboard/update/info',(req,res)=>{
     else{
         res.redirect('/admin/login');
     }
+})
+
+//setting information
+
+route.post(`/updated/info`,(req,res)=>{
+    pool.query(`UPDATE users
+    SET Doctor = ? , Disease = ? , is_new = 0
+    WHERE Username = ? ;
+    `,[req.body.doctor,req.body.Disease,req.body.id],(err,obj)=>{
+        if(err)
+        console.log(err)
+        else
+        res.send(`User info updated`)
+    })
 })
 
 // updating ptients
