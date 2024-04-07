@@ -9,7 +9,15 @@ route.use(body_parser.json());
 
 
 route.get('/dashboard',(req,res)=>{
-    res.render('patient/dashboard_patient');
+    if(req.session.username){
+        // console.log(req.session.username)
+        res.render('patient/dashboard_patient',{user:req.session.username});
+
+    }
+    else{
+
+        res.redirect('/user/login')
+    }
 })
 
 
@@ -54,8 +62,11 @@ route.post('/logged',(req,res)=>{
             }
           
             else{
-              req.session.username = obj[0].name;
-              res.render ('patient/dashboard_patient',{user:req.body.Username});
+            //   console.log(obj[0]);
+              req.session.username = obj[0].Username;
+
+            //   console.log(req.session.username);
+              res.redirect ('/user/dashboard');
             }
           }
 
@@ -63,19 +74,55 @@ route.post('/logged',(req,res)=>{
 })
 
 route.get('/dashboard/appointment',(req,res)=>{
-    res.render('patient/dashboard_appointment');
+    if(req.session.username){
+      
+        res.render('patient/dashboard_appointment',{user:req.session.username});
+
+    }
+    else{
+
+        res.redirect('/user/login')
+    }
+  
 })
 
 route.get('/dashboard/request',(req,res)=>{
-    res.render('patient/dashboard_md');
+    if(req.session.username){
+        // console.log(req.session.username)
+        res.render('patient/dashboard_md',{user:req.session.username});
+
+    }
+    else{
+
+        res.redirect('/user/login')
+    }
+
 })
 
 route.get('/dashboard/diagnosis',(req,res)=>{
-    res.render('patient/diagnosis');
+    if(req.session.username){
+        // console.log(req.session.username)
+        res.render('patient/diagnosis',{user:req.session.username});
+
+    }
+    else{
+
+        res.redirect('/user/login')
+    }
+   
 })
 
 route.get('/dashboard/treatment',(req,res)=>{
-    res.render('patient/treatment_dashboard');
+    if(req.session.username){
+        // console.log(req.session.username)
+        res.render('patient/treatment_dashboard',{user:req.session.username});
+
+    }
+    else{
+
+        res.redirect('/user/login')
+    }
+    
 })
 
 module.exports=route
