@@ -104,6 +104,30 @@ route.get('/dashboard/appointment',(req,res)=>{
         res.redirect('/admin/login');
     }
 })
+//updating the appointment list
+
+route.post('/appointment/done',(req,res)=>{
+    let b = req.body;
+    pool.query(`insert into appointments values(?,?,?,?,?)` , [b.id, b.date, b.doctor, b.category, b.status],(err,obj)=>{
+        if(err){
+        console.log(err);
+        res.send('appointment can not be done');
+
+        }
+        else 
+        res.send('appointment added')
+
+
+    })
+})
+
+
+
+
+
+
+
+
 
 // rendering the login page
 
