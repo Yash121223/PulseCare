@@ -11,7 +11,16 @@ route.use(body_parser.json());
 route.get('/dashboard',(req,res)=>{
     if(req.session.username){
         // console.log(req.session.username)
-        res.render('patient/dashboard_patient',{user:req.session.username});
+        let uname = req.session.username
+        pool.query(`select * from info_form where Username = ? ` , [uname],(err,data)=>{
+            if(err)
+            console.log(err)
+            else{
+                res.render('patient/dashboard_patient',{user:req.session.username, info:data});
+
+            }
+        })
+     
 
     }
     else{
@@ -76,8 +85,16 @@ route.post('/logged',(req,res)=>{
 route.get('/dashboard/appointment',(req,res)=>{
     if(req.session.username){
       
-        res.render('patient/dashboard_appointment',{user:req.session.username});
+        let uname=req.session.username;
+        // console.log(req.session.username)
+        pool.query(`select * from appointments where P_id = ? ` , [uname],(err,data)=>{
+            if(err)
+            console.log(err)
+            else{
+                res.render('patient/dashboard_appointment',{user:req.session.username, info:data});
 
+            }
+        })
     }
     else{
 
@@ -114,8 +131,17 @@ route.get('/dashboard/diagnosis',(req,res)=>{
 
 route.get('/dashboard/treatment',(req,res)=>{
     if(req.session.username){
+        let uname=req.session.username;
         // console.log(req.session.username)
-        res.render('patient/treatment_dashboard',{user:req.session.username});
+        pool.query(`select * from reports where Username = ? ` , [uname],(err,data)=>{
+            if(err)
+            console.log(err)
+            else{
+                res.render('patient/treatment_dashboard',{user:req.session.username, info:data});
+
+            }
+        })
+        
 
     }
     else{
@@ -124,5 +150,12 @@ route.get('/dashboard/treatment',(req,res)=>{
     }
     
 })
+
+route.get('/logout',(req,res)=>{
+    req.session.destroy()
+    res.redirect('/user/login');
+    
+})
+
 
 module.exports=route

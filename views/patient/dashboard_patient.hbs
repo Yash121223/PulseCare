@@ -58,7 +58,7 @@
         <ul class="side-menu">
 
             <li>
-                <a href="#" class="logout">
+                <a href="/user/logout" class="logout">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>
@@ -109,11 +109,12 @@
             </div>
 
             <ul class="box-info">
+                {{#info}}
                 <li>
                     <i class='bx bxs-thermometer'></i>
                     <span class="text">
                         <p>Temperature</p>
-                        <h3>98 </h3>
+                        <h3>{{Temperature}}</h3>
                         <p class="small-text">in Farenheight</p>
                     </span>
                 </li>
@@ -121,7 +122,7 @@
                     <i class='bx bxs-alarm-add'></i>
                     <span class="text">
                         <p>Heart Rate</p>
-                        <h3>78</h3>
+                        <h3>{{Heart_Rate}}</h3>
                         <p class="small-text">safe [60-100 beats]</p>
                     </span>
                 </li>
@@ -130,14 +131,14 @@
                     <i class='bx bxs-heart-circle' ></i>
                     <span class="text">
                         <p>Blood Group</p>
-                        <h3>O-</h3>
+                        <h3>{{Blood_Group}}</h3>
                     </span>
                 </li>
                 <li>
                     <i class='bx bx-donate-heart' ></i>
                     <span class="text">
                         <p>Systole BP</p>
-                        <h3>78</h3>
+                        <h3>{{Systole}}</h3>
                         <p class="small-text">Safe [90-120 mm Hg]</p>
                     </span>
                 </li>
@@ -145,7 +146,7 @@
                     <i class='bx bxs-donate-heart' ></i>
                     <span class="text">
                         <p>Diastole BP</p>
-                        <h3>74</h3>
+                        <h3>{{Diastole}}</h3>
                         <p class="small-text">Safe [60-80 mm Hg]</p>
                     </span>
                 </li>
@@ -153,7 +154,7 @@
                     <i class='bx bx-wind' ></i>
                     <span class="text">
                         <p>SpO2</p>
-                        <h3>95</h3>
+                        <h3>{{SpO2}}</h3>
                         <p class="small-text">Range [95% or higher]</p>
                     </span>
                 </li>
@@ -161,7 +162,7 @@
                     <i class='bx bx-body' ></i>
                     <span class="text">
                         <p>Respiration Rate</p>
-                        <h3>20</h3>
+                        <h3>{{Respiration}}</h3>
                         <p class="small-text">Safe [12 to 16 breaths/min]</p>
                     </span>
                 </li>
@@ -169,7 +170,7 @@
                     <i class='bx bx-dumbbell'></i>
                     <span class="text">
                         <p>BMI</p>
-                        <h3>24.7</h3>
+                        <h3>{{BMI}}</h3>
                         <p class="small-text">Range [18.5 to 24.9]</p>
                     </span>
                 </li>
@@ -177,10 +178,11 @@
                     <i class='bx bxs-virus-block'></i>
                     <span class="text">
                         <p>FiO2</p>
-                        <h3>78</h3>
+                        <h3>{{FiO2}}</h3>
                         <p class="small-text">Range [50 to 100]</p>
                     </span>
                 </li>
+                {{/info}}
             </ul>
 
 

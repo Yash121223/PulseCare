@@ -258,7 +258,7 @@ route.post(`/updated/info`,(req,res)=>{
     })
 })
 
-// updating ptients
+// updating patients
 
 route.get('/dashboard/update/patient',(req,res)=>{
     if(req.session.adminname){
