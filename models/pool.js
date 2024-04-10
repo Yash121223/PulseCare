@@ -3,8 +3,8 @@ const pool=mysql.createConnection({
     host:"localhost",
     user:"root",
     password:"",
-    database:"pulse",
-    port:3310
+    database:"pulsecare",
+    port:3306
 })
 
 pool.connect((err)=>{

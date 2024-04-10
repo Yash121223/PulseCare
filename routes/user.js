@@ -33,7 +33,7 @@ route.get('/dashboard',(req,res)=>{
 route.post('/registered',(req,res)=>{
     const text=req.body;
     // console.log(text);
-    pool.query(`insert into users (Username, Name, Age, Mobile, Gender, Password) values (?,?,?,?,?,?)`, [text.Username,text.Name, text.Age, text.Mobile ,text.Gender, text.Password],(err,obj)=>{
+    pool.query(`insert into users (Username, Name,Email, Age, Mobile, Gender, Password) values (?,?,?,?,?,?,?)`, [text.Username,text.Name, text.Email,text.Age, text.Mobile ,text.Gender, text.Password],(err,obj)=>{
         if(err){
             console.log(err);
             res.send('Username already exists!');
