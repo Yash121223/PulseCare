@@ -16,7 +16,24 @@
 </head>
 
 <body>
-
+<div id="profile-modal" class="modal">
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <ul class="users">
+            {{#userss}}
+            <li>{{Username}} is the new user update their values.</li>
+            {{/userss}}
+        </ul>
+        <ul class="requests">
+            {{#request}}
+            <li>{{P_id}} requested for the appointment. 
+                <button onclick="update_appointment('{{P_id}}',1)" >Accept</button>
+                <button onclick="update_appointment('{{P_id}}',2)">Deny</button>
+            </li>
+            {{/request}}
+        </ul>
+        </div>
+    </div>
 
     <!-- SIDEBAR -->
     <section id="sidebar">
@@ -81,12 +98,12 @@
             </form>
             <input type="checkbox" id="switch-mode" hidden>
             <label for="switch-mode" class="switch-mode"></label>
-            <a href="#" class="notification">
+            <a href=""  id="profile-link">
                 <i class='bx bxs-bell'></i>
                 <span class="num">{{notification}}</span>
-            </a>
+            </div>
             <a href="#" class="profile">
-                <img src="img/people.png">
+                Admin
             </a>
         </nav>
         <!-- NAVBAR -->

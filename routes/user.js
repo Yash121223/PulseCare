@@ -97,7 +97,7 @@ route.get('/dashboard/appointment',(req,res)=>{
       
         let uname=req.session.username;
         // console.log(req.session.username)
-        pool.query(`select * from appointments where P_id = ? ` , [uname],(err,data)=>{
+        pool.query(`select * from appointments where P_id = ? and Status='1' ` , [uname],(err,data)=>{
             if(err)
             console.log(err)
             else{
@@ -124,6 +124,17 @@ route.get('/dashboard/request',(req,res)=>{
         res.redirect('/user/login')
     }
 
+})
+
+route.post('/appointment/requested',(req,res)=>{
+    pool.query(`insert into appointments (P_id,Date, Doctor, Category, Status) values(?,?,?,?, '3') `,[req.session.username,req.body.Date,req.body.Doctor,req.body.Category],(err,obj)=>{
+        if(err){
+            res.send('err');
+        }
+        else{
+            res.redirect('/user/dashboard/request');
+        }
+    })
 })
 
 route.get('/dashboard/diagnosis',(req,res)=>{
