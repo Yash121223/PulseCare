@@ -139,20 +139,18 @@ route.get('/dashboard/patients', (req, res) => {
 
 route.get('/dashboard/appointment', (req, res) => {
     if (req.session.adminname) {
-        pool.query('select count (*) as count from users where is_new=1', (err, obj) => {
-            if (err) {
+        if(req.query.status==1){
 
-                console.log(err);
-                res.render('admin/add_appointment', { notification: 0 });
-            } else {
-                if (obj.length == 0)
-                    res.render('admin/add_appointment', { notification: 0 });
-                else {
-                    res.render('admin/add_appointment', { notification: obj[0].count });
-                }
-            }
-
-        })
+            res.render('admin/add_appointment',{action:'user',status:'New appointment scheduled!!'});
+            
+        }
+        else if(req.query.status==2) {
+            res.render('admin/add_appointment',{action:'user',status:'appointment can not be scheduled!!'});
+            
+        }
+        else{
+            res.render('admin/add_appointment',{action:'user'});
+        }
     }
     else {
         res.redirect('/admin/login');
@@ -163,13 +161,10 @@ route.get('/dashboard/appointment', (req, res) => {
 route.post('/appointment/done', (req, res) => {
     let b = req.body;
     pool.query(`insert into appointments values(?,?,?,?,?)`, [b.id, b.date, b.doctor, b.category, b.status], (err, obj) => {
-        if (err) {
-            console.log(err);
-            res.send('appointment can not be done');
-
-        }
+        if (err)
+        res.redirect('/admin/dashboard/appointment?status=2')
         else
-            res.send('appointment added')
+        res.redirect('/admin/dashboard/appointment?status=1')
 
 
     })
@@ -206,9 +201,9 @@ route.post('/doctor/added', (req, res) => {
     pool.query(qry, [req.body.name, req.body.department, req.body.degree, req.body.date, req.body.mobile], (err, obj) => {
         if (err) {
             console.log(err);
-            res.redirect('/admin/dashboard/add_doctor')
+            res.redirect('/admin/dashboard/doctor?status=2')
         } else {
-            res.redirect('/admin/dashboard');
+            res.redirect('/admin/dashboard/doctor?status=1');
         }
     })
 })
@@ -217,20 +212,18 @@ route.post('/doctor/added', (req, res) => {
 
 route.get('/dashboard/doctor', (req, res) => {
     if (req.session.adminname) {
-        pool.query('select count (*) as count from users where is_new=1', (err, obj) => {
-            if (err) {
+        if(req.query.status==1){
 
-                console.log(err);
-                res.render('admin/add_doctor', { notification: 0 });
-            } else {
-                if (obj.length == 0)
-                    res.render('admin/add_doctor', { notification: 0 });
-                else {
-                    res.render('admin/add_doctor', { notification: obj[0].count });
-                }
-            }
-
-        })
+            res.render('admin/add_doctor',{action:'user',status:'New Doctor added!!'});
+            
+        }
+        else if(req.query.status==2) {
+            res.render('admin/add_doctor',{action:'user',status:'Doctor can not be added!!'});
+            
+        }
+        else{
+            res.render('admin/add_doctor',{action:'user'});
+        }
     }
     else {
         res.redirect('/admin/login');
