@@ -241,20 +241,19 @@ route.get('/dashboard/doctor', (req, res) => {
 
 route.get('/dashboard/update/health', (req, res) => {
     if (req.session.adminname) {
-        pool.query('select count (*) as count from users where is_new=1', (err, obj) => {
-            if (err) {
+        if(req.query.status==1){
 
-                console.log(err);
-                res.render('admin/update_health', { notification: 0 });
-            } else {
-                if (obj.length == 0)
-                    res.render('admin/update_health', { notification: 0 });
-                else {
-                    res.render('admin/update_health', { notification: obj[0].count });
-                }
-            }
-
-        })
+            res.render('admin/update_health',{action:'user',status:'User health factor updated!!'});
+            
+        }
+        else if(req.query.status==2) {
+            res.render('admin/update_health',{action:'user',status:'User health factor can not be updated!!'});
+            
+        }
+        else{
+            res.render('admin/update_health',{action:'user'});
+        }
+       
     }
     else {
         res.redirect('/admin/login');
@@ -267,9 +266,9 @@ route.post(`/updated/health`, (req, res) => {
     let p = req.body;
     pool.query(`INSERT INTO info_form (Username, Temperature, Heart_Rate, Blood_Group, Systole, Diastole, SpO2, Respiration, BMI, FiO2) values(?,?,?,?,?,?,?,?,?,?)`, [p.id, p.temperature, p.heartRate, p.blood, p.systole, p.diastole, p.spo, p.respiration, p.bmi, p.fio], (err, obj) => {
         if (err)
-            console.log(err)
+        res.redirect('/admin/dashboard/update/health?status=2')
         else
-            res.send(`health information updated`)
+        res.redirect('/admin/dashboard/update/health?status=1')
     })
 })
 
@@ -338,20 +337,17 @@ route.get('/dashboard/update/patient', (req, res) => {
 
 route.get('/dashboard/update/report', (req, res) => {
     if (req.session.adminname) {
-        pool.query('select count (*) as count from users where is_new=1', (err, obj) => {
-            if (err) {
+        if(req.query.status==1){
 
-                console.log(err);
-                res.render('admin/update_report', { notification: 0 });
-            } else {
-                if (obj.length == 0)
-                    res.render('admin/update_report', { notification: 0 });
-                else {
-                    res.render('admin/update_report', { notification: obj[0].count });
-                }
-            }
-
-        })
+            res.render('admin/update_report',{action:'user',status:'User reports updated!!'});
+            
+        }
+        else if(req.query.status==2) {
+            res.render('admin/update_report',{action:'user',status:'User reports can not be updated!!'});
+        }
+        else{
+            res.render('admin/update_report',{action:'user'});
+        }
     }
     else {
         res.redirect('/admin/login');
@@ -364,9 +360,9 @@ route.post(`/updated/reports`, upload.single('report'), (req, res) => {
 
     pool.query(`INSERT INTO reports (Username,Date,Doctor,Category,Description,Medicine,Report) values(?,?,?,?,?,?,?) `, [c.id, c.date, c.doctor, c.category, c.description, c.medicine, req.FileName], (err, obj) => {
         if (err)
-            console.log(err)
+            res.redirect('/admin/dashboard/update/report?status=2')
         else
-            res.send(`Report added succefully`)
+        res.redirect('/admin/dashboard/update/report?status=1')
     })
 })
 
