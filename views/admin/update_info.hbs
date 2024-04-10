@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Patient Information</title>
     <link rel="stylesheet" href="/css/update_info.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <input type="text" value="{{status}}" hidden id="errbox">
     <div class="container">
         <form action="/admin/updated/info" method="post">
             <h2>Update Personal Information</h2>
@@ -38,4 +40,21 @@
         </form>
     </div>
 </body>
+<script>
+    const errbox = document.querySelector('#errbox').value;
+      if (errbox == "User information updated!!") {
+        Swal.fire({
+          title: 'Notification',
+          text: errbox,
+          icon: "success"
+        })
+      }
+      else if (errbox == "User info can not be updated!!") {
+        Swal.fire({
+          title: 'Notification',
+          text: errbox,
+          icon: "warning"
+        })
+      }
+</script>
 </html>

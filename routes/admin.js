@@ -45,7 +45,7 @@ route.get('/dashboard', (req, res) => {
                 console.log(err);
             }
             else {
-                pool.query(`select count(*) as count from doctors`, (err2, num) => {
+                pool.query(`select * from doctors`, (err2, num) => {
                     if (err2) {
                         console.log(err2);
                     }
@@ -54,14 +54,14 @@ route.get('/dashboard', (req, res) => {
                             if (err) {
 
                                 console.log(err);
-                                res.render('admin/dashboard_admin', { notification: 0, doctors: data1, num: num });
+                                res.render('admin/dashboard_admin', { notification: 0, doctors: data1, num: num.length });
                             } else {
                                 pool.query(`select *  from appointments where Status=3`, (err1, obj1) => {
 
                                     if (obj.length == 0)
-                                        res.render('admin/dashboard_admin', { notification: obj.length + obj1.length, doctors: data1, num: num, userss: obj, request: obj1 });
+                                        res.render('admin/dashboard_admin', { notification: obj.length + obj1.length, doctors: data1, num: num.length, userss: obj, request: obj1 });
                                     else {
-                                        res.render('admin/dashboard_admin', { notification: obj.length + obj1.length, doctors: data1, num: num[0].count, userss: obj, request: obj1 });
+                                        res.render('admin/dashboard_admin', { notification: obj.length + obj1.length, doctors: data1, num: num.length, userss: obj, request: obj1 });
                                     }
                                 })
                             }
@@ -278,20 +278,18 @@ route.post(`/updated/health`, (req, res) => {
 
 route.get('/dashboard/update/info', (req, res) => {
     if (req.session.adminname) {
-        pool.query('select count (*) as count from users where is_new=1', (err, obj) => {
-            if (err) {
+        if(req.query.status==1){
 
-                console.log(err);
-                res.render('admin/update_info', { notification: 0 });
-            } else {
-                if (obj.length == 0)
-                    res.render('admin/update_info', { notification: 0 });
-                else {
-                    res.render('admin/update_info', { notification: obj[0].count });
-                }
-            }
-
-        })
+            res.render('admin/update_info',{action:'user',status:'User information updated!!'});
+            
+        }
+        else if(req.query.status==2) {
+            res.render('admin/update_info',{action:'user',status:'User info can not be updated!!'});
+            
+        }
+        else{
+            res.render('admin/update_info',{action:'user'});
+        }
     }
     else {
         res.redirect('/admin/login');
@@ -306,9 +304,9 @@ route.post(`/updated/info`, (req, res) => {
     WHERE Username = ? ;
     `, [req.body.doctor, req.body.Disease, req.body.id], (err, obj) => {
         if (err)
-            console.log(err)
+            res.redirect('/admin/dashboard/update/info?status=2')
         else
-            res.send(`User info updated`)
+        res.redirect('/admin/dashboard/update/info?status=1')
     })
 })
 
