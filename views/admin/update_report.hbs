@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="/admin/updated/reports" method="post">
+        <form action="/admin/updated/reports" method="post" enctype="multipart/form-data">
             <h2>New Report</h2>
             <div class="content">
                 <div class="input-box">
@@ -37,8 +37,8 @@
                 </div>
                 <div class="input-box">
                     <label for="report">Add Report PDF</label>
-                    {{!-- <input type="file" placeholder="Upload Report's PDF" name="report" required> --}}
-                    <input type="text" placeholder="Upload Report's PDF" name="report" required>
+                    <input type="file" placeholder="Upload Report's PDF" name="report" required>
+                    {{!-- <input type="text" placeholder="Upload Report's PDF" name="report" required> --}}
                 </div>
                 <div class="button-container">
                     <button type="submit">Add Report</button>

@@ -1,75 +1,84 @@
 <!DOCTYPE html>
 <!-- Website - www.codingnepalweb.com -->
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
 
-    <title>PulseCare</title>
-    <link rel="stylesheet" href="/css/login.css" />
-    <script src="../custom-scripts.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  </head>
-  <body>
-    <section class="wrapper">
-      <div class="form signup">
-        <header>Signup</header>
-        <form action="/{{action}}/registered" method="post">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>PulseCare</title>
+  <link rel="stylesheet" href="/css/login.css" />
+  <script src="../custom-scripts.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+  <input type="text" value="{{status}}" hidden id="errbox">
+  <section class="wrapper">
+    <div class="form signup">
+      <header>Signup</header>
+      <form action="/{{action}}/registered" method="post">
         <input type="text" placeholder="Enter Username" name="Username" required />
-          <input type="text" placeholder="Full name" name="Name" required />
-          <input type="email" placeholder="Email address" name="Email" required />
-          <input type="number" placeholder="Enter patient's age" name="Age" required>
-          <input type="number" placeholder="Enter mobile number" name="Mobile" required>
-          <select id="gender" name="Gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="others">Others</option>
+        <input type="text" placeholder="Full name" name="Name" required />
+        <input type="email" placeholder="Email address" name="Email" required />
+        <input type="number" placeholder="Enter patient's age" name="Age" required>
+        <input type="number" placeholder="Enter mobile number" name="Mobile" required>
+        <select id="gender" name="Gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="others">Others</option>
         </select>
 
-          <input type="password" placeholder="Password" name="Password" required / >
-          <div class="checkbox">
-            <input type="checkbox" id="signupCheck" />
-            <label for="signupCheck">I accept all terms & conditions</label>
-          </div>
-          <input type="submit" value="Signup" />
-        </form>
-      </div>
+        <input type="password" placeholder="Password" name="Password" required />
+        <div class="checkbox">
+          <input type="checkbox" id="signupCheck" />
+          <label for="signupCheck">I accept all terms & conditions</label>
+        </div>
+        <input type="submit" value="Signup" />
+      </form>
+    </div>
 
-      <div class="form login">
-        <header>Login</header>
-        <form action="/{{action}}/logged" method="post">
-          <input type="text" placeholder="Email address" name="Username" required />
-          <input type="password" placeholder="Password" name="Password" required />
-          <a href="#">Forgot password?</a>
-          <input type="submit" value="Login" />
-        </form>
-      </div>
-      <input type="text" name="" id="signuperr " value="{{serr}}" hidden>
-      <script>
+    <div class="form login">
+      <header>Login</header>
+      <form action="/{{action}}/logged" method="post">
+        <input type="text" placeholder="Email address" name="Username" required />
+        <input type="password" placeholder="Password" name="Password" required />
+        <a href="#">Forgot password?</a>
+        <input type="submit" value="Login" />
+      </form>
+    </div>
 
-        const wrapper = document.querySelector(".wrapper"),
-          signupHeader = document.querySelector(".signup header"),
-          loginHeader = document.querySelector(".login header");
+    <script>
 
-        loginHeader.addEventListener("click", () => {
-          wrapper.classList.add("active");
-        });
-        signupHeader.addEventListener("click", () => {
-          wrapper.classList.remove("active");
-        });
+      const wrapper = document.querySelector(".wrapper"),
+        signupHeader = document.querySelector(".signup header"),
+        loginHeader = document.querySelector(".login header");
 
-        const signup=document.getElementById('signuperr');
-        const signuperr=signup.value;
-        console.log(signuperr);
-        if(signuperr!=""){
-          Swal.fire({
-              icon: "success",
-              title: "Registration Successful !",
-              text: `Your User ID is :${value} `,
-          });
-        }
-      </script>
-    </section>
-  </body>
+      loginHeader.addEventListener("click", () => {
+        wrapper.classList.add("active");
+      });
+      signupHeader.addEventListener("click", () => {
+        wrapper.classList.remove("active");
+      });
+
+      const errbox = document.querySelector('#errbox').value;
+      if (errbox == "User Registered Successfully!!") {
+        Swal.fire({
+          title: 'Notification',
+          text: errbox,
+          icon: "success"
+        })
+      }
+      else if (errbox == "Username Already Exists!") {
+        Swal.fire({
+          title: 'Notification',
+          text: errbox,
+          icon: "warning"
+        })
+      }
+    </script>
+  </section>
+</body>
+
 </html>

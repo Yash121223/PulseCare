@@ -3,6 +3,23 @@ const route = express.Router();
 const pool = require('../models/pool');
 const body_parser = require('body-parser');
 const { renderSync } = require('node-sass');
+// adding multer for adding pdfs
+const {v4:uuid,parse}=require('uuid')
+const multer=require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "./public/files");
+    },
+    filename: function (req, file, cb) {
+      let ext = file.originalname.split(".");
+      ext = ext[ext.length - 1];
+  
+      let filename = uuid() + "." + ext;
+      req.FileName = filename;
+      cb(null, filename);
+    },
+  });
+  const upload=multer({storage:storage})
 // const sessions = require('sessions');
 
 route.use(body_parser.urlencoded({ extended: false }));
@@ -307,10 +324,10 @@ route.get('/dashboard/update/report',(req,res)=>{
 })
 
 //Adding report
-route.post(`/updated/reports`,(req,res)=>{
+route.post(`/updated/reports`,upload.single('report'),(req,res)=>{
     let c= req.body;
 
-    pool.query(`INSERT INTO reports (Username,Date,Doctor,Category,Description,Medicine,Report) values(?,?,?,?,?,?,?) `, [c.id,c.date,c.doctor,c.category,c.description,c.medicine,c.report],(err,obj)=>{
+    pool.query(`INSERT INTO reports (Username,Date,Doctor,Category,Description,Medicine,Report) values(?,?,?,?,?,?,?) `, [c.id,c.date,c.doctor,c.category,c.description,c.medicine,req.FileName],(err,obj)=>{
         if(err)
         console.log(err)
         else

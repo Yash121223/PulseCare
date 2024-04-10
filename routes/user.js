@@ -36,7 +36,7 @@ route.post('/registered',(req,res)=>{
     pool.query(`insert into users (Username, Name,Email, Age, Mobile, Gender, Password) values (?,?,?,?,?,?,?)`, [text.Username,text.Name, text.Email,text.Age, text.Mobile ,text.Gender, text.Password],(err,obj)=>{
         if(err){
             console.log(err);
-            res.send('Username already exists!');
+            res.redirect('/user/login?status=2')
         }
        
         else{
@@ -45,7 +45,8 @@ route.post('/registered',(req,res)=>{
                 if (err) {
                     console.log(err);
                 } else {
-                    res.send("User successfully registered, proceed to login!")
+                    // res.send("User successfully registered, proceed to login!")
+                    res.redirect('/user/login?status=1')
                 }
             })
         }
@@ -54,7 +55,16 @@ route.post('/registered',(req,res)=>{
 })
 
 route.get('/login',(req,res)=>{
-    res.render('login',{action:'user'});
+    if(req.query.status==1){
+
+        res.render('login',{action:'user',status:'User Registered Successfully!!'});
+        
+    }else if(req.query.status==2){
+        res.render('login',{action:'user',status:'Username Already Exists!'});
+    }
+    else{
+        res.render('login',{action:'user'});
+    }
 })
 
 route.post('/logged',(req,res)=>{
