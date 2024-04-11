@@ -1,25 +1,7 @@
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
 
-const modal = document.getElementById('profile-modal');
-const profileLink = document.getElementById('profile-link');
-const closeButton = document.getElementsByClassName('close')[0];
 
-
-profileLink.addEventListener('click', function(event) {
-  event.preventDefault(); 
-  modal.style.display = 'flex';
-});
-
-closeButton.addEventListener('click', function() {
-  modal.style.display = 'none';
-});
-
-window.addEventListener('click', function(event) {
-  if (event.target === modal) {
-    modal.style.display = 'none';
-  }
-});
 allSideMenu.forEach(item=> {
 	const li = item.parentElement;
 
