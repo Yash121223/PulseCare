@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/appointment.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title>Appointments</title>
 </head>
 
 <body>
-
+<input type="text" value="{{status}}" hidden id="errbox">
 
     <!-- SIDEBAR -->
     <section id="sidebar">
@@ -139,12 +140,24 @@
             
 
         </main>
-        <!-- MAIN -->
+       
     </section>
-    <!-- CONTENT -->
+    
 
 
-    <script src="/js/index.js"></script>
+    
 </body>
+ <script>
+    const errbox = document.querySelector('#errbox').value;
+      if (errbox == "Appointment request sent!!") {
+        Swal.fire({
+          title: 'Notification',
+          text: errbox,
+          icon: "success"
+        })
+      }
+     
+</script>
+ <script src="/js/index.js"></script>
 
 </html>

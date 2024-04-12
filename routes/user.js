@@ -62,6 +62,9 @@ route.get('/login',(req,res)=>{
     }else if(req.query.status==2){
         res.render('login',{action:'user',status:'Username Already Exists!'});
     }
+    else if(req.query.status==3){
+        res.render('login',{action:'user',status:'Invalid Credentials!!'});
+    }
     else{
         res.render('login',{action:'user'});
     }
@@ -71,13 +74,12 @@ route.post('/logged',(req,res)=>{
     const pid=req.body.Username;
     pool.query(`select * from users where Username =? and Password=?`,[pid,req.body.Password],(err,obj)=>{
         if (err){
-            console.log (err);
-            res.redirect ('/user/login');
+            res.redirect('/user/login?status=3')
           }
           
           else{
             if (obj.length == 0){
-              res.redirect('/user/login');
+                res.redirect('/user/login?status=3')
             }
           
             else{
@@ -116,7 +118,19 @@ route.get('/dashboard/appointment',(req,res)=>{
 route.get('/dashboard/request',(req,res)=>{
     if(req.session.username){
         // console.log(req.session.username)
-        res.render('patient/dashboard_md',{user:req.session.username});
+        if(req.query.status==1){
+
+            res.render('patient/dashboard_md',{action:'user',status:'Appointment request sent!!',user:req.session.username});
+            
+        }
+        // else if(req.query.status==2) {
+        //     res.render('patient/dashboard_md',{action:'user',status:'User info can not be updated!!',user:req.session.username});
+            
+        // }
+        else{
+            res.render('patient/dashboard_md',{action:'user',user:req.session.username});
+        }
+       
 
     }
     else{
@@ -129,10 +143,10 @@ route.get('/dashboard/request',(req,res)=>{
 route.post('/appointment/requested',(req,res)=>{
     pool.query(`insert into appointments (P_id,Date, Doctor, Category, Status) values(?,?,?,?, '3') `,[req.session.username,req.body.Date,req.body.Doctor,req.body.Category],(err,obj)=>{
         if(err){
-            res.send('err');
+            res.redirect('/user/dashboard/request?status=2')
         }
         else{
-            res.redirect('/user/dashboard/request');
+            res.redirect('/user/dashboard/request?status=1')
         }
     })
 })

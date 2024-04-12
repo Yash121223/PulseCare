@@ -50,20 +50,26 @@ route.get('/dashboard', (req, res) => {
                         console.log(err2);
                     }
                     else {
-                        pool.query('select *  from users where is_new=1', (err, obj) => {
-                            if (err) {
-
-                                console.log(err);
-                                res.render('admin/dashboard_admin', { notification: 0, doctors: data1, num: num.length });
-                            } else {
-                                pool.query(`select *  from appointments where Status=3`, (err1, obj1) => {
-
-                                    if (obj.length == 0)
-                                        res.render('admin/dashboard_admin', { notification: obj.length + obj1.length, doctors: data1, num: num.length, userss: obj, request: obj1 });
-                                    else {
-                                        res.render('admin/dashboard_admin', { notification: obj.length + obj1.length, doctors: data1, num: num.length, userss: obj, request: obj1 });
-                                    }
-                                })
+                       pool.query(`select * from users `, (err3, pnum)=>{
+                        if(err3)
+                        console.log(err3);
+                        else{
+                            pool.query('select *  from users where is_new=1', (err, obj) => {
+                                if (err) {
+    
+                                    console.log(err);
+                                    res.render('admin/dashboard_admin', { notification: 0, doctors: data1, num: num.length, pnum:pnum.length});
+                                } else {
+                                    pool.query(`select *  from appointments where Status=3`, (err1, obj1) => {
+    
+                                        if (obj.length == 0)
+                                            res.render('admin/dashboard_admin', { notification: obj.length + obj1.length, doctors: data1, num: num.length, userss: obj, request: obj1 , pnum:pnum.length});
+                                        else {
+                                            res.render('admin/dashboard_admin', { notification: obj.length + obj1.length, doctors: data1, num: num.length, userss: obj, request: obj1 , pnum:pnum.length});
+                                        }
+                                    })
+                        }
+                       })
                             }
 
                         })
@@ -85,15 +91,29 @@ route.post('/appointmentapprovals',(req,res)=>{
                 console.log(err)
             }else{
                 
+               if(req.body.status==1){
                 var mailoptions={
                     from:'ayash0876@gmail.com',
                     to:email[0].Email,
                     subject:'Regarding the appointment you requested.',
-                    text:'Hello! your appointment requested is '
+                    text:'Hello! your appointment request is approved ,check on appointment page'
                 }
                 transporter.sendMail(mailoptions,((err,info)=>{
                     console.log('Mail sent');
                 }))
+               
+               }
+               else{
+                var mailoptions={
+                    from:'ayash0876@gmail.com',
+                    to:email[0].Email,
+                    subject:'Regarding the appointment you requested.',
+                    text:'Hello! your appointment request is denied ,check on appointment page'
+                }
+                transporter.sendMail(mailoptions,((err,info)=>{
+                    console.log('Mail sent');
+                }))
+               }
                 res.send([]);
 
             }
@@ -354,7 +374,26 @@ route.post(`/updated/reports`, upload.single('report'), (req, res) => {
     pool.query(`INSERT INTO reports (Username,Date,Doctor,Category,Description,Medicine,Report) values(?,?,?,?,?,?,?) `, [c.id, c.date, c.doctor, c.category, c.description, c.medicine, req.FileName], (err, obj) => {
         if (err)
             res.redirect('/admin/dashboard/update/report?status=2')
-        else
+        else{
+            pool.query('select Email from users where Username =?',[c.id],(err,email)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    
+                  
+                    var mailoptions={
+                        from:'ayash0876@gmail.com',
+                        to:email[0].Email,
+                        subject:'Regarding the neew reports',
+                        text:'Hello! New report is added, please check in your treatment history'
+                    }
+                    transporter.sendMail(mailoptions,((err,info)=>{
+                        console.log('Mail sent');
+                    }))
+                   
+                   
+                }})
+        }
         res.redirect('/admin/dashboard/update/report?status=1')
     })
 })
