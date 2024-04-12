@@ -26,9 +26,9 @@
         </ul>
         <ul class="requests">
             {{#request}}
-            <li>{{P_id}} requested for the appointment. 
-                <button onclick="update_appointment('{{P_id}}',1)" >Accept</button>
-                <button onclick="update_appointment('{{P_id}}',2)">Deny</button>
+            <li>{{P_id}} requested for the appointment with {{Doctor}} on {{Date}}. 
+                <button id="btn1" onclick="update_appointment('{{P_id}}',1)" >Accept</button>
+                <button id="btn2" onclick="update_appointment('{{P_id}}',2)">Deny</button>
             </li>
             {{/request}}
         </ul>

@@ -74,6 +74,30 @@ body {
   
 	
   }
+  #btn1{
+	padding: 5px;
+	color: white;
+	background-color: green;
+	border: none;
+	border-radius: 4px;
+
+  }
+  #btn1:hover{
+	background: rgb(110, 237, 110);
+	cursor: pointer;
+  }
+  #btn2{
+	padding: 5px;
+	color: white;
+	background-color: red;
+	border: none;
+	border-radius: 4px;
+
+  }
+  #btn2:hover{
+	background: rgb(211, 77, 77);
+	cursor: pointer;
+  }
 
   .close {
 	color: #aaa;
