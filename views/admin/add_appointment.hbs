@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link href="/images/logo.png" rel="icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Appointment</title>
@@ -24,9 +25,14 @@
                     <input type="date" placeholder="Enter date of appointment" name="date" required>
                 </div>
                 <div class="input-box">
-                    <label for="doctor">Doctor</label>
-                    <input type="text" placeholder="Enter updated doctor" name="doctor" required>
+                    <label for="doctor">Doctor </label>
+                    <select id="doctor" name="Doctor" required >
+                        {{#doc}}
+                        <option value="{{Name}}">{{Name}}</option>
+                       {{/doc}}
+                    </select>
                 </div>
+                
                 <div class="input-box">
                     <label for="category">Category</label>
                     <input type="text" placeholder="Enter department of doc" name="category" required>
@@ -34,8 +40,8 @@
                 <div class="input-box">
                     <label for="status">Status: </label>
                     <select id="status" name="status">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                        <option value="1">Accept</option>
+                        <option value="2">Deny</option>
                     </select>
                 </div>
                 <div class="button-container">

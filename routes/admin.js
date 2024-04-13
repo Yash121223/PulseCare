@@ -159,23 +159,30 @@ route.get('/dashboard/patients', (req, res) => {
 
 route.get('/dashboard/appointment', (req, res) => {
     if (req.session.adminname) {
-        if(req.query.status==1){
+        pool.query(`select Name from doctors`,(err,docname)=>{
+            if(err)
+            res.send(err)
+            else{
+                if(req.query.status==1){
 
-            res.render('admin/add_appointment',{action:'user',status:'New appointment scheduled!!'});
-            
+                    res.render('admin/add_appointment',{action:'user',status:'New appointment scheduled!!',doc:docname});
+                    
+                }
+                else if(req.query.status==2) {
+                    res.render('admin/add_appointment',{action:'user',status:'appointment can not be scheduled!!',doc:docname});
+                    
+                }
+                else{
+                    res.render('admin/add_appointment',{action:'user',doc:docname});
+                }
+            }
+            })
         }
-        else if(req.query.status==2) {
-            res.render('admin/add_appointment',{action:'user',status:'appointment can not be scheduled!!'});
-            
-        }
-        else{
-            res.render('admin/add_appointment',{action:'user'});
-        }
-    }
     else {
         res.redirect('/admin/login');
     }
 })
+
 //updating the appointment list
 
 route.post('/appointment/done', (req, res) => {
@@ -290,18 +297,24 @@ route.post(`/updated/health`, (req, res) => {
 
 route.get('/dashboard/update/info', (req, res) => {
     if (req.session.adminname) {
-        if(req.query.status==1){
+        pool.query(`select Name from doctors`,(err,docname)=>{
+            if(err)
+            res.send (err)
+            else{
+                if(req.query.status==1){
 
-            res.render('admin/update_info',{action:'user',status:'User information updated!!'});
-            
-        }
-        else if(req.query.status==2) {
-            res.render('admin/update_info',{action:'user',status:'User info can not be updated!!'});
-            
-        }
-        else{
-            res.render('admin/update_info',{action:'user'});
-        }
+                    res.render('admin/update_info',{action:'user',status:'User information updated!!',doc:docname});
+                    
+                }
+                else if(req.query.status==2) {
+                    res.render('admin/update_info',{action:'user',status:'User info can not be updated!!',doc:docname});
+                    
+                }
+                else{
+                    res.render('admin/update_info',{action:'user',doc:docname});
+                }
+            }
+        })
     }
     else {
         res.redirect('/admin/login');

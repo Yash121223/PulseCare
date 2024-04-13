@@ -32,6 +32,10 @@ app.get('/contact',(req,res)=>{
     res.render('contact');
 })
 
+app.post('/mailsent',(req,res)=>{
+    res.send("Query sent!");
+})
+
 
 app.listen(port,()=>{
     console.log('server connected');

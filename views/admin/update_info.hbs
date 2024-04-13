@@ -26,8 +26,12 @@
                     <input type="text" placeholder="Enter updated disease" name="Disease" required>
                 </div>
                 <div class="input-box">
-                    <label for="doctor">Doctor</label>
-                    <input type="text" placeholder="Enter updated doctor" name="doctor" required>
+                    <label for="doctor">Doctor </label>
+                    <select id="doctor" name="doctor" required >
+                        {{#doc}}
+                        <option value="{{Name}}">{{Name}}</option>
+                       {{/doc}}
+                    </select>
                 </div>
                 {{!-- <div class="input-box">
                     <label for="age">Age</label>

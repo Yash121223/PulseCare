@@ -61,6 +61,14 @@ h2{
     border: 1px solid #ccc;
     outline: none;
 }
+.input-box select{
+    height: 40px;
+    width: 95%;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
 
 
 .input-box input:is(:focus, :valid){
